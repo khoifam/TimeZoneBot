@@ -13,12 +13,13 @@ public class Memory {
 	
 	private File inputFile;
 	
-	Memory() 
+	Memory() throws Exception
 	{
-		inputFile = new File("C:\\Users\\phamk\\Desktop\\discord\\javabot2\\memory.txt");
+		inputFile = new File("memory.txt");
+		inputFile.createNewFile();
 	}
 	
-	public void addTextChannel(TextChannel textchannel) throws IOException  //add one text channel to the txt file
+	public void addTextChannel(TextChannel textchannel) throws IOException  //add one text channel to the txt file, NOT USED
 	{
 		Scanner in = new Scanner(inputFile);
 		PrintWriter out = new PrintWriter(new FileWriter(inputFile, true)); //FileWriter prevents overriding
@@ -44,7 +45,8 @@ public class Memory {
 	public void updateTextChannel(ArrayList<TextChannel> textchannels) throws IOException
 	{
 		PrintWriter out = new PrintWriter(inputFile);
-		for (int i = 0; i < textchannels.size(); i++)
+		int textchannelsSize = textchannels.size();
+		for (int i = 0; i < textchannelsSize; i++)
 		{
 			out.println(textchannels.get(i).getIdLong());
 		}
@@ -63,7 +65,7 @@ public class Memory {
 		return output;	
 	}
 	
-	public void removeTextChannel(TextChannel textchannel) throws IOException
+	public void removeTextChannel(TextChannel textchannel) throws IOException //NOT USED
 	{
 		
 	}

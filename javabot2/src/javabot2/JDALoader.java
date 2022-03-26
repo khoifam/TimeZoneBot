@@ -8,20 +8,33 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import java.io.File;
+import java.util.Scanner;
+
 
 public class JDALoader extends ListenerAdapter {
 	private static JDA jda;
 	private TopicAuto3 ram;
 	private Memory memory;
 	private ArrayList<TextChannel> textchannels;
+	private File tokenFile;
 	
 	JDALoader() throws Exception
 	{
-		jda = JDABuilder.createDefault("NjI0Mzk4NzAxNzcwNzAyODU4.XYQamw.rmhezzKk5iwKUmJxnmMtLZQaa40").build().awaitReady();
+		String token = "";
+		tokenFile = new File("token.txt");
+		tokenFile.createNewFile();
+		Scanner in = new Scanner(tokenFile);
+		if (in.hasNext())
+		{
+			token = in.next();
+		}
+		jda = JDABuilder.createDefault(token).build().awaitReady();
 		ram = new TopicAuto3();
 		memory = new Memory();
-		ram.initTextChannels(memory.retrieveTextChannels()); //add all text channels from the txt file to the arraylist
-		textchannels = ram.getTextChannels();
+		ram.initTextChannels(memory.retrieveTextChannels()); //add all text channels from the txt file to the arraylist and remove invalid ones
+		textchannels = ram.getTextChannels(); // getTextChannels() returns a reference to the ArrayList created in TopicAuto3
+		memory.updateTextChannel(textchannels); //update the text file to remove invalid ones
 	}
 	
 	@Override
@@ -59,7 +72,7 @@ public class JDALoader extends ListenerAdapter {
 			}
 			else
 			{
-				e.getChannel().sendMessage("The bot is not activated for this text channel. Type addbingbong to activate.").queue();
+				e.getChannel().sendMessage("The bot is not activated for this text channel. Type \"addbingbong\" to activate.").queue();
 			}
 		}
 		

@@ -30,9 +30,10 @@ public class TopicAuto3
 		return textchannels;
 	}
 	
-	public boolean addTextChannel(TextChannel textchannel) //add one text channel
+	public boolean addTextChannel(TextChannel textchannel) //add one text channel into the arraylist
 	{
-		for (int i = 0; i < textchannels.size(); i++) //check if channel is already added
+		int textchannelsSize = textchannels.size();
+		for (int i = 0; i < textchannelsSize; i++) //check if channel is already added
 		{
 			if (textchannels.get(i).equals(textchannel))
 			{
@@ -47,9 +48,10 @@ public class TopicAuto3
 		return true;
 	}
 	
-	public boolean removeTextChannel(TextChannel textchannel) //remove one text channel
+	public boolean removeTextChannel(TextChannel textchannel) //remove one text channel from the arraylist
 	{
-		for (int i = 0; i < textchannels.size(); i++) //check if channel is already added
+		int textchannelsSize = textchannels.size();
+		for (int i = 0; i < textchannelsSize; i++) //check if channel is already added
 		{
 			if (textchannels.get(i).equals(textchannel))
 			{
@@ -64,7 +66,8 @@ public class TopicAuto3
 	public boolean getStatus(TextChannel textchannel)
 	{
 		System.out.println(textchannels);
-		for (int i = 0; i < textchannels.size(); i++) //check if channel is already added
+		int textchannelsSize = textchannels.size();
+		for (int i = 0; i < textchannelsSize; i++) //check if channel is already added
 		{
 			if (textchannels.get(i).equals(textchannel))
 			{
@@ -74,12 +77,14 @@ public class TopicAuto3
 		return false;
 	}
 	
-	public void initTextChannels(ArrayList<TextChannel> database) //add text channels from an arraylist
+	public void initTextChannels(ArrayList<TextChannel> database) //add text channels to this arraylist from the arraylist in Memory class
 	{
-		for (int i = 0; i < database.size(); i++)
+		int databaseSize = database.size();
+		for (int i = 0; i < databaseSize; i++)
 		{
 			textchannels.add(database.get(i));
 		}
+		textchannels.removeIf(n -> (n == null));
 		startTimer();
 	}
 	
@@ -94,12 +99,12 @@ public class TopicAuto3
 			
 			String pst = time.format(date);
 			
-			zone = TimeZone.getTimeZone("GMT+10");
+			zone = TimeZone.getTimeZone("Australia/Sydney");
 			time.setTimeZone(zone);
 			
 			String aus = time.format(date);
 			
-			zone = TimeZone.getTimeZone("GMT+7");
+			zone = TimeZone.getTimeZone("Asia/Ho_Chi_Minh");
 			time.setTimeZone(zone);
 			
 			String vn = time.format(date);
@@ -109,10 +114,14 @@ public class TopicAuto3
 			
 			String est = time.format(date);
 			
-			for (int i = 0; i < textchannels.size(); i++)
+			int textchannelsSize = textchannels.size();
+			for (int i = 0; i < textchannelsSize; i++)
 			{
 				System.out.println(textchannels.get(i));
-				textchannels.get(i).getManager().setTopic("VN: " + vn + " ---- AUS: " + aus + " ---- West: " + pst + " ---- East: " + est).queue();
+				if (textchannels.get(i) != null)
+				{
+					textchannels.get(i).getManager().setTopic("VN: " + vn + " ---- AUS: " + aus + " ---- West: " + pst + " ---- East: " + est).queue();
+				}
 				System.out.println("VN: " + vn + " ---- AUS: " + aus + " ---- West: " + pst + " ---- East: " + est);
 			}
 		}

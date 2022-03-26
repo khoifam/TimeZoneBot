@@ -12,6 +12,15 @@ public class Javabot2 {
 		api.addEventListener(new MyListener());
 		
 	}
-	
+	/**
+	 * What if the text file of text channels is gone? 
+	 * What if the token text file is gone?
+	 * What if the token is invalid?
+	 * Add console warning if a file is not found
+	 * 
+	 * Needs to improve naming
+	 * 
+	 * Change the arraylist into a hash table (HashSet)
+	 */
 	
 }
