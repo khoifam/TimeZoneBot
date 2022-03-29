@@ -19,6 +19,7 @@ public class Javabot2 {
 	 * Add console warning if a file is not found
 	 * 
 	 * Needs to improve naming
+	 * Move the comments to the top and keep under 70
 	 * 
 	 * Change the arraylist into a hash table (HashSet)
 	 */
