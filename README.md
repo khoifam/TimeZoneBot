@@ -2,6 +2,8 @@
 
 A Discord bot that displays times from different time zones on your server's text channels description.
 
+<img src="assets/readme_image.png" width="800">
+
 ## Prerequisites
 
 ## How to run

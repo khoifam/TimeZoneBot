@@ -13,6 +13,8 @@ public class Javabot2 {
 		
 	}
 	/**
+	 * To-do:
+	 * 
 	 * What if the text file of text channels is gone? 
 	 * What if the token text file is gone?
 	 * What if the token is invalid?
@@ -22,6 +24,9 @@ public class Javabot2 {
 	 * Move the comments to the top and keep under 70
 	 * 
 	 * Change the arraylist into a hash table (HashSet)
+	 * Serialization
+	 * 
+	 * Gradle & Maven
 	 */
 	
 }
